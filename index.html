@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Henrique - Coordenador de Assistência Técnica & Programador</title>
+    <title>Makita - Bem Vindo</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -14,543 +13,416 @@
             box-sizing: border-box;
         }
 
-        :root {
-            --makita-blue: #0066CC;
-            --makita-blue-dark: #004A99;
-            --dark-bg: #0a0e27;
-            --dark-secondary: #1a1f3a;
-            --text-primary: #ffffff;
-            --text-secondary: #b0b9d9;
-            --accent: #00d9ff;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
         body {
-            background: linear-gradient(135deg, var(--dark-bg) 0%, #0f1433 100%);
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            color: var(--text-primary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #000000;
+            font-family: 'Arial', sans-serif;
             overflow-x: hidden;
             position: relative;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+            padding: 20px;
         }
 
-        /* Background Grid Sutil */
-        .grid-bg {
+        /* Background animado com gradiente */
+        .background {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            opacity: 0.03;
-            background-image: 
-                linear-gradient(0deg, transparent 24%, rgba(0, 102, 204, 0.05) 25%, rgba(0, 102, 204, 0.05) 26%, transparent 27%, transparent 74%, rgba(0, 102, 204, 0.05) 75%, rgba(0, 102, 204, 0.05) 76%, transparent 77%, transparent),
-                linear-gradient(90deg, transparent 24%, rgba(0, 102, 204, 0.05) 25%, rgba(0, 102, 204, 0.05) 26%, transparent 27%, transparent 74%, rgba(0, 102, 204, 0.05) 75%, rgba(0, 102, 204, 0.05) 76%, transparent 77%, transparent);
-            background-size: 50px 50px;
-            z-index: 0;
-            pointer-events: none;
+            background: linear-gradient(45deg, #000000, #1a0000, #000000);
+            background-size: 400% 400%;
+            z-index: -2;
+            animation: gradientShift 8s ease infinite;
         }
 
-        /* Orb de fundo sutil */
-        .orb {
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Partículas flutuando */
+        .particle {
             position: fixed;
-            border-radius: 50%;
-            opacity: 0.05;
-            filter: blur(80px);
             pointer-events: none;
-            z-index: 0;
+            opacity: 0.5;
         }
 
-        .orb-1 {
-            width: 400px;
-            height: 400px;
-            background: var(--makita-blue);
-            top: -100px;
-            left: -100px;
-            animation: float 20s infinite ease-in-out;
+        .particle.dot {
+            width: 4px;
+            height: 4px;
+            background: #ff0000;
+            border-radius: 50%;
         }
 
-        .orb-2 {
-            width: 300px;
-            height: 300px;
-            background: var(--accent);
-            bottom: -50px;
-            right: -50px;
-            animation: float 25s infinite ease-in-out reverse;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(30px, -30px); }
+        .particle.line {
+            width: 2px;
+            height: 30px;
+            background: linear-gradient(180deg, #ff0000, transparent);
         }
 
         .container {
+            text-align: center;
             position: relative;
             z-index: 1;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
+            max-width: 600px;
+            width: 100%;
         }
 
-        /* Header */
-        header {
-            padding: 40px 20px;
-            text-align: center;
+        .welcome-text {
+            font-size: 2rem;
+            color: #ffffff;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
             opacity: 0;
-            animation: fadeInDown 0.8s ease-out forwards;
         }
 
-        .logo {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--makita-blue);
-            margin-bottom: 10px;
-            letter-spacing: -1px;
-        }
-
-        /* Main Content */
-        .main-content {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 40px 20px;
-        }
-
-        .hero {
-            text-align: center;
-            max-width: 800px;
-            opacity: 0;
-            animation: fadeIn 1s ease-out 0.3s forwards;
-        }
-
-        .hero h1 {
-            font-size: clamp(2.5rem, 8vw, 4.5rem);
-            font-weight: 700;
-            margin-bottom: 20px;
-            letter-spacing: -1.5px;
-            line-height: 1.2;
-        }
-
-        .title-highlight {
-            color: var(--makita-blue);
-        }
-
-        .hero .subtitle {
-            font-size: clamp(1.1rem, 3vw, 1.4rem);
-            color: var(--text-secondary);
+        .makita-title {
+            font-size: 5rem;
+            color: #ff0000;
+            font-weight: bold;
             margin-bottom: 40px;
-            font-weight: 400;
+            letter-spacing: 3px;
+            text-shadow: 0 0 8px #ff0000, 0 0 15px rgba(255, 0, 0, 0.3);
+            filter: drop-shadow(0 0 5px rgba(255, 0, 0, 0.4));
+            opacity: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .letter {
+            display: inline-block;
+            opacity: 0;
+            position: relative;
+        }
+
+        .letter:hover {
+            filter: drop-shadow(0 0 10px rgba(255, 102, 102, 0.6));
+        }
+
+        .developed-section {
+            margin-bottom: 40px;
+            opacity: 0;
+        }
+
+        .developed-label {
+            font-size: 1.2rem;
+            color: #cccccc;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .developer-name {
+            font-size: 2rem;
+            color: #ff0000;
+            font-weight: bold;
+            text-shadow: 0 0 8px rgba(255, 0, 0, 0.3);
+            margin-bottom: 30px;
+        }
+
+        /* Instagram Section */
+        .instagram-section {
+            margin-top: 40px;
+            opacity: 0;
+        }
+
+        .instagram-label {
+            font-size: 1.1rem;
+            color: #cccccc;
+            margin-bottom: 20px;
             letter-spacing: 0.5px;
         }
 
-        .roles {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            justify-content: center;
-            margin-bottom: 50px;
-        }
-
-        .role-badge {
-            padding: 10px 20px;
-            background: rgba(0, 102, 204, 0.1);
-            border: 1.5px solid var(--makita-blue);
-            border-radius: 30px;
-            font-size: 0.95rem;
-            color: var(--makita-blue);
-            font-weight: 500;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .role-badge:hover {
-            background: rgba(0, 102, 204, 0.2);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 16px rgba(0, 102, 204, 0.2);
-        }
-
-        /* Skills Section */
-        .skills {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            justify-content: center;
-            margin-bottom: 60px;
-            opacity: 0;
-            animation: fadeIn 1s ease-out 0.6s forwards;
-        }
-
-        .skill-tag {
-            padding: 8px 16px;
-            background: rgba(176, 185, 217, 0.1);
-            border: 1px solid rgba(0, 217, 255, 0.3);
-            border-radius: 20px;
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            transition: all 0.3s ease;
-            cursor: default;
-        }
-
-        .skill-tag:hover {
-            background: rgba(0, 102, 204, 0.15);
-            border-color: var(--makita-blue);
-            color: var(--makita-blue);
-        }
-
-        /* CTA Buttons */
-        .cta-buttons {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-bottom: 60px;
-            opacity: 0;
-            animation: fadeIn 1s ease-out 0.9s forwards;
-        }
-
-        .btn {
-            padding: 14px 32px;
-            border-radius: 12px;
-            font-size: 1rem;
-            font-weight: 600;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
+        .instagram-link {
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-            text-decoration: none;
-            letter-spacing: 0.5px;
-        }
-
-        .btn-primary {
-            background: var(--makita-blue);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: var(--makita-blue-dark);
-            transform: translateY(-4px);
-            box-shadow: 0 12px 24px rgba(0, 102, 204, 0.3);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--text-primary);
-            border: 2px solid var(--text-secondary);
-        }
-
-        .btn-secondary:hover {
-            border-color: var(--makita-blue);
-            color: var(--makita-blue);
-            background: rgba(0, 102, 204, 0.1);
-            transform: translateY(-4px);
-        }
-
-        /* Social Links */
-        .social-links {
-            display: flex;
-            gap: 20px;
             justify-content: center;
-            margin-bottom: 80px;
-            opacity: 0;
-            animation: fadeIn 1s ease-out 1.2s forwards;
-        }
-
-        .social-link {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: rgba(0, 102, 204, 0.1);
-            border: 2px solid rgba(0, 102, 204, 0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--makita-blue);
+            gap: 12px;
+            padding: 14px 32px;
+            background: linear-gradient(135deg, #ff0000, #ff4444);
+            color: #ffffff;
             text-decoration: none;
-            font-size: 1.3rem;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
             transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
+            border: 2px solid #ff0000;
         }
 
-        .social-link:hover {
-            background: var(--makita-blue);
-            color: white;
-            transform: translateY(-6px);
-            box-shadow: 0 12px 24px rgba(0, 102, 204, 0.3);
+        .instagram-link:hover {
+            background: linear-gradient(135deg, #ff4444, #ff0000);
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.6);
+            transform: scale(1.05);
         }
 
-        /* Footer */
-        footer {
-            padding: 60px 20px 40px;
-            text-align: center;
-            border-top: 1px solid rgba(0, 102, 204, 0.2);
-            background: rgba(10, 14, 39, 0.8);
-            backdrop-filter: blur(10px);
+        .instagram-icon {
+            font-size: 1.5rem;
+            animation: pulse 2s ease-in-out infinite;
         }
 
-        .footer-content {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .contact-label {
-            font-size: 0.95rem;
-            color: var(--text-secondary);
-            margin-bottom: 12px;
-            letter-spacing: 0.5px;
-        }
-
-        .contact-email {
-            font-size: 1.2rem;
-            color: var(--makita-blue);
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            display: inline-block;
-        }
-
-        .contact-email:hover {
-            color: var(--accent);
-            text-decoration: underline;
-        }
-
-        .footer-divider {
-            height: 1px;
-            background: rgba(0, 102, 204, 0.2);
-            margin: 30px 0;
-        }
-
-        .footer-credit {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            opacity: 0.7;
-        }
-
-        /* Animações */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
                 opacity: 1;
-                transform: translateY(0);
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.8;
             }
         }
 
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
+        .arrow {
+            font-size: 1rem;
+            animation: bounce 1.5s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateX(0);
             }
-            to {
-                opacity: 1;
-                transform: translateY(0);
+            50% {
+                transform: translateX(8px);
             }
         }
 
         /* Mobile Responsivo */
         @media (max-width: 768px) {
-            header {
-                padding: 30px 20px;
+            body {
+                padding: 20px;
             }
 
-            .logo {
-                font-size: 2rem;
+            .welcome-text {
+                font-size: 1.5rem;
+                margin-bottom: 20px;
             }
 
-            .hero h1 {
-                font-size: 2rem;
+            .makita-title {
+                font-size: 3rem;
+                margin-bottom: 30px;
+                letter-spacing: 2px;
             }
 
-            .hero .subtitle {
-                font-size: 1.1rem;
-            }
-
-            .roles {
-                gap: 10px;
-            }
-
-            .role-badge {
-                padding: 8px 16px;
-                font-size: 0.9rem;
-            }
-
-            .skills {
-                gap: 10px;
-            }
-
-            .skill-tag {
-                padding: 6px 12px;
-                font-size: 0.8rem;
-            }
-
-            .cta-buttons {
-                gap: 15px;
-            }
-
-            .btn {
-                padding: 12px 24px;
-                font-size: 0.95rem;
-            }
-
-            .social-link {
-                width: 45px;
-                height: 45px;
-                font-size: 1.1rem;
-            }
-
-            footer {
-                padding: 40px 20px 30px;
-            }
-
-            .contact-email {
+            .developed-label {
                 font-size: 1rem;
+                margin-bottom: 10px;
+            }
+
+            .developer-name {
+                font-size: 1.5rem;
+                margin-bottom: 25px;
+            }
+
+            .instagram-label {
+                font-size: 0.95rem;
+                margin-bottom: 15px;
+            }
+
+            .instagram-link {
+                padding: 12px 28px;
+                font-size: 1rem;
+                gap: 10px;
+            }
+
+            .instagram-icon {
+                font-size: 1.3rem;
             }
         }
 
         @media (max-width: 480px) {
-            .hero h1 {
-                font-size: 1.7rem;
+            body {
+                padding: 15px;
+                min-height: 100vh;
             }
 
-            .hero .subtitle {
-                font-size: 1rem;
+            .container {
+                max-width: 100%;
             }
 
-            .roles {
-                flex-direction: column;
-                align-items: center;
+            .welcome-text {
+                font-size: 1.2rem;
+                margin-bottom: 15px;
             }
 
-            .cta-buttons {
-                flex-direction: column;
-                width: 100%;
+            .makita-title {
+                font-size: 2.2rem;
+                margin-bottom: 20px;
+                letter-spacing: 1px;
             }
 
-            .btn {
-                width: 100%;
-                justify-content: center;
-            }
-
-            .social-links {
-                gap: 15px;
-            }
-
-            .social-link {
-                width: 40px;
-                height: 40px;
-                font-size: 1rem;
-            }
-
-            .contact-label {
+            .developed-label {
                 font-size: 0.9rem;
+                margin-bottom: 8px;
             }
 
-            .contact-email {
-                font-size: 1rem;
-                word-break: break-all;
+            .developer-name {
+                font-size: 1.3rem;
+                margin-bottom: 20px;
+            }
+
+            .instagram-section {
+                margin-top: 30px;
+            }
+
+            .instagram-label {
+                font-size: 0.85rem;
+                margin-bottom: 12px;
+            }
+
+            .instagram-link {
+                padding: 10px 24px;
+                font-size: 0.9rem;
+                gap: 8px;
+            }
+
+            .instagram-icon {
+                font-size: 1.1rem;
+            }
+
+            .arrow {
+                font-size: 0.9rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="grid-bg"></div>
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-
+    <div class="background"></div>
+    
     <div class="container">
-        <header>
-            <div class="logo">Makita</div>
-        </header>
-
-        <main class="main-content">
-            <section class="hero">
-                <h1>Olá, sou <span class="title-highlight">Henrique</span></h1>
-                <p class="subtitle">Transformando ideias em soluções tecnológicas</p>
-
-                <div class="roles">
-                    <div class="role-badge">👨‍💼 Coordenador de Assistência Técnica</div>
-                    <div class="role-badge">💻 Programador</div>
-                </div>
-
-                <div class="skills">
-                    <span class="skill-tag">Python</span>
-                    <span class="skill-tag">JavaScript</span>
-                    <span class="skill-tag">React</span>
-                    <span class="skill-tag">Node.js</span>
-                    <span class="skill-tag">HTML/CSS</span>
-                    <span class="skill-tag">Git</span>
-                    <span class="skill-tag">API Rest</span>
-                    <span class="skill-tag">Suporte Técnico</span>
-                </div>
-
-                <div class="cta-buttons">
-                    <a href="https://github.com/inshenrique" target="_blank" class="btn btn-primary">
-                        <i class="fab fa-github"></i> GitHub
-                    </a>
-                    <a href="https://www.instagram.com/perfildohenrique/" target="_blank" class="btn btn-secondary">
-                        <i class="fab fa-instagram"></i> Instagram
-                    </a>
-                </div>
-
-                <div class="social-links">
-                    <a href="https://github.com/inshenrique" target="_blank" class="social-link" title="GitHub">
-                        <i class="fab fa-github"></i>
-                    </a>
-                    <a href="https://www.instagram.com/perfildohenrique/" target="_blank" class="social-link" title="Instagram">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="https://www.linkedin.com/in/henrique" target="_blank" class="social-link" title="LinkedIn">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
-                </div>
-            </section>
-        </main>
-
-        <footer>
-            <div class="footer-content">
-                <p class="contact-label">Para entrar em contato, escreva para:</p>
-                <a href="mailto:henrique@makita.com.br" class="contact-email">henrique@makita.com.br</a>
-                <div class="footer-divider"></div>
-                <p class="footer-credit">© 2024 Henrique. Todos os direitos reservados.</p>
-            </div>
-        </footer>
+        <div class="welcome-text" id="welcome">Seja bem vindo a</div>
+        
+        <div class="makita-title" id="makita"></div>
+        
+        <div class="developed-section">
+            <div class="developed-label">desenvolvido por:</div>
+            <div class="developer-name">Henrique</div>
+        </div>
+        
+        <div class="instagram-section">
+            <div class="instagram-label">siga-me no Instagram</div>
+            <a href="https://www.instagram.com/perfildohenrique/" target="_blank" class="instagram-link">
+                <i class="fab fa-instagram instagram-icon"></i>
+                Instagram
+                <span class="arrow">→</span>
+            </a>
+        </div>
     </div>
 
     <script>
-        // Inicializar ScrollTrigger
-        gsap.registerPlugin(ScrollTrigger);
+        // Criar partículas flutuando
+        function createParticles() {
+            const particleCount = 20;
+            const body = document.body;
 
-        // Animações ao carregar
-        window.addEventListener('load', () => {
-            // Nada precisa ser feito além das animações CSS
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement("div");
+                particle.className = "particle " + (Math.random() > 0.5 ? "dot" : "line");
+                
+                const x = Math.random() * window.innerWidth;
+                const y = Math.random() * window.innerHeight;
+                
+                particle.style.left = x + "px";
+                particle.style.top = y + "px";
+                
+                body.appendChild(particle);
+
+                // Animar partículas com GSAP
+                gsap.to(particle, {
+                    y: Math.random() > 0.5 ? -100 : 100,
+                    x: (Math.random() - 0.5) * 100,
+                    opacity: Math.random() * 0.5,
+                    duration: gsap.utils.random(4, 8),
+                    repeat: -1,
+                    yoyo: true,
+                    ease: "sine.inOut"
+                });
+            }
+        }
+
+        // Criar as letras no HTML
+        const text = "Makita";
+        const makitaElement = document.getElementById("makita");
+        
+        for (let char of text) {
+            const letter = document.createElement("span");
+            letter.className = "letter";
+            letter.textContent = char;
+            makitaElement.appendChild(letter);
+        }
+
+        // Timeline GSAP
+        const tl = gsap.timeline();
+
+        // Welcome text entra
+        tl.to("#welcome", { opacity: 1, duration: 0.5 }, 0);
+
+        // Aguarda 0.3s antes de iniciar a digitação do Makita
+        tl.to({}, { duration: 0.3 }, 0.5);
+
+        // Anima o título do Makita
+        tl.to(".makita-title", { opacity: 1, duration: 0.3 }, 0.8);
+
+        // Anima cada letra individualmente
+        const letters = document.querySelectorAll(".letter");
+        letters.forEach((letter, index) => {
+            tl.to(letter, { 
+                opacity: 1, 
+                duration: 0.3,
+                ease: "power2.out"
+            }, 0.8 + (index * 0.3));
         });
 
-        // Hover effects nos botões (já feito em CSS)
-        // Interatividade básica
-        document.querySelectorAll('.skill-tag').forEach((tag, index) => {
-            tag.addEventListener('mouseenter', () => {
-                gsap.to(tag, {
-                    y: -5,
-                    duration: 0.3,
-                    overwrite: 'auto'
-                });
-            });
+        // Developed section
+        tl.to(".developed-section", {
+            opacity: 1,
+            duration: 0.5,
+            ease: "power2.out"
+        }, "-=0.3");
 
-            tag.addEventListener('mouseleave', () => {
-                gsap.to(tag, {
-                    y: 0,
-                    duration: 0.3,
-                    overwrite: 'auto'
-                });
+        // Instagram section
+        tl.to(".instagram-section", {
+            opacity: 1,
+            duration: 0.5,
+            ease: "power2.out"
+        }, "-=0.2");
+
+        // Interatividade com mouse - Efeito de repulsão
+        document.addEventListener("mousemove", (e) => {
+            letters.forEach((letter) => {
+                const rect = letter.getBoundingClientRect();
+                const letterX = rect.left + rect.width / 2;
+                const letterY = rect.top + rect.height / 2;
+
+                const distance = Math.hypot(e.clientX - letterX, e.clientY - letterY);
+                const maxDistance = 150;
+
+                if (distance < maxDistance) {
+                    const angle = Math.atan2(letterY - e.clientY, letterX - e.clientX);
+                    const force = (1 - distance / maxDistance) * 30;
+
+                    gsap.to(letter, {
+                        x: Math.cos(angle) * force,
+                        y: Math.sin(angle) * force,
+                        duration: 0.3,
+                        overwrite: 'auto'
+                    });
+                } else {
+                    gsap.to(letter, {
+                        x: 0,
+                        y: 0,
+                        duration: 0.3,
+                        overwrite: 'auto'
+                    });
+                }
             });
         });
+
+        // Iniciar partículas
+        createParticles();
     </script>
 </body>
 </html>
