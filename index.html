@@ -39,7 +39,7 @@
         .letter {
             display: inline-block;
             opacity: 0;
-            animation: typeWriter 0.1s ease-in-out forwards;
+            animation: typeWriter 0.3s ease-in-out forwards;
         }
 
         p {
@@ -102,14 +102,14 @@
                 const letter = document.createElement("span");
                 letter.className = "letter";
                 letter.textContent = text[index];
-                letter.style.animationDelay = (index * 0.1) + "s";
+                letter.style.animationDelay = (index * 0.3) + "s";
                 makitaElement.appendChild(letter);
                 index++;
-                setTimeout(typeWriter, 100);
+                setTimeout(typeWriter, 300);
             }
         }
 
-        typeWriter();
+        setTimeout(typeWriter, 300);
     </script>
 </body>
 </html>
