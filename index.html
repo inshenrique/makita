@@ -36,11 +36,18 @@
             font-weight: bold;
         }
 
+        .letter {
+            display: inline-block;
+            opacity: 0;
+            animation: typeWriter 0.1s ease-in-out forwards;
+        }
+
         p {
             font-size: 1.5rem;
             color: #ffffff;
             margin-top: 30px;
             opacity: 0.9;
+            animation: fadeIn 0.8s ease-in-out;
         }
 
         p a {
@@ -50,6 +57,16 @@
 
         p a:hover {
             text-decoration: underline;
+        }
+
+        /* Animação de digitação */
+        @keyframes typeWriter {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
         }
 
         /* Animação de entrada */
@@ -71,8 +88,28 @@
 </head>
 <body>
     <div class="container">
-        <h1>Bem Vindo a <span class="makita">Makita</span></h1>
+        <h1>Bem Vindo a <span class="makita" id="makita"></span></h1>
         <p>Desenvolvido por <a href="https://www.instagram.com/perfildohenrique/" target="_blank">Henrique</a></p>
     </div>
+
+    <script>
+        const text = "Makita";
+        const makitaElement = document.getElementById("makita");
+        let index = 0;
+
+        function typeWriter() {
+            if (index < text.length) {
+                const letter = document.createElement("span");
+                letter.className = "letter";
+                letter.textContent = text[index];
+                letter.style.animationDelay = (index * 0.1) + "s";
+                makitaElement.appendChild(letter);
+                index++;
+                setTimeout(typeWriter, 100);
+            }
+        }
+
+        typeWriter();
+    </script>
 </body>
 </html>
