@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Makita - Bem Vindo</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -79,8 +80,8 @@
             color: #ff0000;
             font-weight: bold;
             display: inline-block;
-            text-shadow: 0 0 20px #ff0000, 0 0 40px rgba(255, 0, 0, 0.5);
-            filter: drop-shadow(0 0 10px #ff0000);
+            text-shadow: 0 0 8px #ff0000, 0 0 15px rgba(255, 0, 0, 0.3);
+            filter: drop-shadow(0 0 5px rgba(255, 0, 0, 0.4));
         }
 
         .letter {
@@ -90,7 +91,78 @@
         }
 
         .letter:hover {
-            filter: drop-shadow(0 0 15px #ff6666);
+            filter: drop-shadow(0 0 10px rgba(255, 102, 102, 0.6));
+        }
+
+        /* Instagram Section */
+        .instagram-section {
+            margin-top: 50px;
+            opacity: 0;
+        }
+
+        .instagram-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .instagram-text {
+            font-size: 1.2rem;
+            color: #ffffff;
+        }
+
+        .instagram-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #ff0000, #ff4444);
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
+            border: 2px solid #ff0000;
+        }
+
+        .instagram-link:hover {
+            background: linear-gradient(135deg, #ff4444, #ff0000);
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.6);
+            transform: scale(1.05);
+        }
+
+        .instagram-icon {
+            font-size: 1.5rem;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.8;
+            }
+        }
+
+        .arrow {
+            font-size: 1rem;
+            margin-left: 8px;
+            animation: bounce 1.5s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(8px);
+            }
         }
 
         p {
@@ -115,6 +187,21 @@
         .container {
             opacity: 0;
         }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .instagram-text {
+                font-size: 1rem;
+            }
+
+            .instagram-link {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -123,6 +210,17 @@
     <div class="container">
         <h1>Bem Vindo a <span class="makita" id="makita"></span></h1>
         <p>Desenvolvido por <a href="https://www.instagram.com/perfildohenrique/" target="_blank">Henrique</a></p>
+        
+        <div class="instagram-section">
+            <div class="instagram-container">
+                <span class="instagram-text">Siga-me no:</span>
+                <a href="https://www.instagram.com/perfildohenrique/" target="_blank" class="instagram-link">
+                    <i class="fab fa-instagram instagram-icon"></i>
+                    Instagram
+                    <span class="arrow">→</span>
+                </a>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -192,6 +290,13 @@
             duration: 0.5,
             ease: "power2.out"
         }, "-=0.2");
+
+        // Anima a seção do Instagram
+        tl.to(".instagram-section", {
+            opacity: 1,
+            duration: 0.6,
+            ease: "power2.out"
+        }, "-=0.3");
 
         // Interatividade com mouse - Efeito de repulsão
         document.addEventListener("mousemove", (e) => {
