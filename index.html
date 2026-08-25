@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Makita - Bem Vindo</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -39,15 +40,13 @@
         .letter {
             display: inline-block;
             opacity: 0;
-            animation: typeWriter 0.3s ease-in-out forwards;
         }
 
         p {
             font-size: 1.5rem;
             color: #ffffff;
             margin-top: 30px;
-            opacity: 0.9;
-            animation: fadeIn 0.8s ease-in-out;
+            opacity: 0;
         }
 
         p a {
@@ -59,30 +58,8 @@
             text-decoration: underline;
         }
 
-        /* Animação de digitação */
-        @keyframes typeWriter {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        /* Animação de entrada */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
         .container {
-            animation: fadeIn 0.8s ease-in-out;
+            opacity: 0;
         }
     </style>
 </head>
@@ -95,21 +72,40 @@
     <script>
         const text = "Makita";
         const makitaElement = document.getElementById("makita");
-        let index = 0;
-
-        function typeWriter() {
-            if (index < text.length) {
-                const letter = document.createElement("span");
-                letter.className = "letter";
-                letter.textContent = text[index];
-                letter.style.animationDelay = (index * 0.3) + "s";
-                makitaElement.appendChild(letter);
-                index++;
-                setTimeout(typeWriter, 300);
-            }
+        
+        // Criar as letras no HTML
+        for (let char of text) {
+            const letter = document.createElement("span");
+            letter.className = "letter";
+            letter.textContent = char;
+            makitaElement.appendChild(letter);
         }
 
-        setTimeout(typeWriter, 300);
+        // Timeline GSAP
+        const tl = gsap.timeline();
+
+        // Container entra com fade
+        tl.to(".container", { opacity: 1, duration: 0.5 }, 0);
+
+        // Aguarda 0.3s antes de iniciar a digitação
+        tl.to({}, { duration: 0.3 }, 0.5);
+
+        // Anima cada letra individualmente
+        const letters = document.querySelectorAll(".letter");
+        letters.forEach((letter, index) => {
+            tl.to(letter, { 
+                opacity: 1, 
+                duration: 0.3,
+                ease: "power2.out"
+            }, 0.8 + (index * 0.3));
+        });
+
+        // Anima o parágrafo após as letras
+        tl.to("p", { 
+            opacity: 0.9, 
+            duration: 0.5,
+            ease: "power2.out"
+        }, "-=0.2");
     </script>
 </body>
 </html>
